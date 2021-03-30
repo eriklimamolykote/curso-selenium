@@ -29,7 +29,6 @@ public class TesteCampoTreinamento {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement textoTextArea = driver.findElement(By.id("elementosForm:sugestoes"));
 		textoTextArea.sendKeys("Teste textArea");
@@ -43,7 +42,6 @@ public class TesteCampoTreinamento {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement radioButton = driver.findElement(By.id("elementosForm:sexo:0"));
 		radioButton.click();
@@ -56,8 +54,7 @@ public class TesteCampoTreinamento {
 	public void deveInteragirComCheckBox() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.manage().window().setSize(new Dimension(1200, 765));;
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement checkBox = driver.findElement(By.id("elementosForm:comidaFavorita:2"));
 		checkBox.click();
@@ -70,7 +67,6 @@ public class TesteCampoTreinamento {
 	public void deveInteragirComComboBox() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement comboBox = driver.findElement(By.id("elementosForm:escolaridade"));
@@ -88,7 +84,6 @@ public class TesteCampoTreinamento {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement comboBox = driver.findElement(By.id("elementosForm:escolaridade"));
 		Select opcaoGraduacao = new Select(comboBox);
@@ -103,5 +98,51 @@ public class TesteCampoTreinamento {
 			}
 		}
 		Assert.assertTrue(encontrou);
+	}
+	
+	@Test
+	public void deveVerificarValoresComboMultiplo() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		WebElement comboMult = driver.findElement(By.id("elementosForm:esportes"));
+		Select opcaoEsporte = new Select(comboMult);
+		opcaoEsporte.selectByVisibleText("Natacao");
+		opcaoEsporte.selectByVisibleText("Corrida");
+		opcaoEsporte.selectByVisibleText("O que eh esporte?");
+		
+		List<WebElement> allSelectedOptions =  opcaoEsporte.getAllSelectedOptions();
+		Assert.assertEquals(3, allSelectedOptions.size());
+		
+		opcaoEsporte.deselectByVisibleText("Corrida");
+		allSelectedOptions = opcaoEsporte.getAllSelectedOptions();
+		Assert.assertEquals(2,  allSelectedOptions.size());
+		driver.quit();
+	}
+	
+	@Test
+	public void deveInteragirComBotoes() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		WebElement botao1 = driver.findElement(By.id("buttonSimple"));
+		botao1.click();
+		
+		Assert.assertEquals("Obrigado!", botao1.getAttribute("value"));
+	}
+	
+	@Test
+	public void deveInteragirComLinks() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		
+		WebElement link = driver.findElement(By.linkText("Voltar"));
+		link.click();
+		Assert.fail();
 	}
 }
