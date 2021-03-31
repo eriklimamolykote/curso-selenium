@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Assert;
@@ -98,6 +100,8 @@ public class TesteCampoTreinamento {
 			}
 		}
 		Assert.assertTrue(encontrou);
+		
+		driver.quit();
 	}
 	
 	@Test
@@ -132,6 +136,8 @@ public class TesteCampoTreinamento {
 		botao1.click();
 		
 		Assert.assertEquals("Obrigado!", botao1.getAttribute("value"));
+		
+		driver.quit();
 	}
 	
 	@Test
@@ -143,6 +149,29 @@ public class TesteCampoTreinamento {
 		
 		WebElement link = driver.findElement(By.linkText("Voltar"));
 		link.click();
-		Assert.fail();
+		
+		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+		
+		driver.quit();
+	}
+	
+	@Test
+	public void deveBuscarTextosNaPagina() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		
+		System.out.println(driver.findElement(By.tagName("body")).getText());
+		
+		// Assert.assertTrue(driver.findElement(By.tagName("body"))
+				// .getText().contains("Campo de Treinamento"));
+		Assert.assertEquals("Campo de Treinamento", 
+				driver.findElement(By.tagName("h3")).getText());
+		
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
+				driver.findElement(By.className("facilAchar")).getText());
+		
+		driver.quit();
 	}
 }
