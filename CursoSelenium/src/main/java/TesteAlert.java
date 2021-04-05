@@ -1,6 +1,8 @@
 import java.io.File;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -12,12 +14,23 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 public class TesteAlert {
 	
+	WebDriver driver = new FirefoxDriver();
+	
+	@Before
+	public void inicializa() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		driver.manage().window().setSize(new Dimension(800, 600));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+	}
+	
+	@After
+	public void finaliza() {
+		driver.quit();
+	}
+	
 	@Test
 	public void deveInteragirComAlert() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		
 		
 		driver.findElement(By.id("alert")).click();
 		Alert alert = driver.switchTo().alert();
@@ -30,10 +43,7 @@ public class TesteAlert {
 	
 	@Test
 	public void deveInteragirComAlertConfirm() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		
 		
 		driver.findElement(By.id("confirm")).click();
 		Alert alerta = driver.switchTo().alert();
@@ -49,15 +59,12 @@ public class TesteAlert {
 		Assert.assertEquals("Negado", alerta.getText());
 		alerta.dismiss();
 		
-		driver.quit();
+		
 	}
 	
 	@Test
 	public void deveInteragirComAlertPrompt() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		
 		
 		driver.findElement(By.id("prompt")).click();
 		Alert alerta = driver.switchTo().alert();
@@ -68,6 +75,6 @@ public class TesteAlert {
 		alerta.accept();
 		Assert.assertEquals(":D", alerta.getText());
 		
-		driver.quit();
+		
 	}
 }

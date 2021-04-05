@@ -3,6 +3,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
 
@@ -10,10 +12,24 @@ import junit.framework.Assert;
 
 public class DesafioCadastro {
 	
+	WebDriver driver = new FirefoxDriver();
+	
+	@Before
+	public void inicializa() {
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		driver.manage().window().setSize(new Dimension(800, 600));
+		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+	}
+	
+	@After
+	public void finaliza() {
+		driver.quit();
+	}
+
+	
 	@Test
 	public void cadastrarUsuario() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
+	
 		driver.manage().window().maximize();
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		WebElement campoNome = driver.findElement(By.id("elementosForm:nome"));
@@ -43,7 +59,6 @@ public class DesafioCadastro {
 		System.out.println(driver.findElement(By.id("resultado")).getText().startsWith("Cadastrado!"));
 		System.out.println("O teste terminou");
 		
-		driver.quit();
 	}
 	
 }
