@@ -32,10 +32,10 @@ public class DesafioCadastro {
 	
 	@Test
 	public void deveRealizarCadastroComSucesso() {
-		dsl.escreve("elementosForm:nome", "Wagner");
-		dsl.escreve("elementosForm:sobrenome", "Costa");
-		dsl.clicarRadioButton("elementosForm:sexo:0");
-		dsl.clicarRadioButton("elementosForm:comidaFavorita:2");
+		dsl.escrever("elementosForm:nome", "Wagner");
+		dsl.escrever("elementosForm:sobrenome", "Costa");
+		dsl.clicarRadio("elementosForm:sexo:0");
+		dsl.clicarRadio("elementosForm:comidaFavorita:2");
 		dsl.selecionarCombo("elementosForm:escolaridade", "Mestrado");
 		dsl.selecionarCombo("elementosForm:esportes", "Natacao");
 		dsl.clicarBotao("elementosForm:cadastrar");
@@ -50,6 +50,38 @@ public class DesafioCadastro {
 		
 		System.out.println("O teste terminou");
 		
+	}
+	
+	@Test
+	public void deveValidarNomeObrigatorio() {
+		dsl.clicarBotao("elementosForm:cadastrar");
+		Assert.assertEquals("Nome eh obrigatorio", dsl.alertaObterTextoEAceita());
+	}
+	
+	@Test
+	public void deveValidarSobrenomeObrigatorio() {
+		dsl.escrever("elementosForm:nome", "Nome qualquer");
+		dsl.clicarBotao("elementosForm:cadastrar");
+		Assert.assertEquals("Sobrenome eh obrigatorio", dsl.alertaObterTextoEAceita());
+	}
+	
+	@Test
+	public void deveValidarSexoObrigatorio() {
+		dsl.escrever("elementosForm:nome", "Nome qualquer");
+		dsl.escrever("elementosForm:sobrenome", "Sobrenome qualquer");
+		dsl.clicarBotao("elementosForm:cadastrar");
+		Assert.assertEquals("Sexo eh obrigatorio",  dsl.alertaObterTextoEAceita());
+	}
+	
+	@Test
+	public void deveValidarComidaVegetariana() {
+		dsl.escrever("elementosForm:nome", "Nome qualquer");
+		dsl.escrever("elementosForm:sobrenome", "Sobrenome qualquer");
+		dsl.clicarRadio("elementosForm:sexo:1");
+		dsl.clicarRadio("elementosForm:comidaFavorita:0");
+		dsl.clicarRadio("elementosForm:comidaFavorita:3");
+		dsl.clicarBotao("elementosForm:cadastrar");
+		Assert.assertEquals("Tem certeza que voce eh vegetariano?", dsl.alertaObterTextoEAceita());
 	}
 	
 }

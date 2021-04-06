@@ -34,7 +34,7 @@ public class TesteCampoTreinamento {
 
 	@Test
 	public void testeTextField() {
-		dsl.escreve("elementosForm:nome", "Teste de escrita");
+		dsl.escrever("elementosForm:nome", "Teste de escrita");
 		WebElement textoTextField = driver.findElement(By.id("elementosForm:nome"));
 		textoTextField.sendKeys("Teste textField");
 		Assert.assertEquals("Teste de escrita", dsl.obterValorCampo("elementosForm:nome"));
@@ -43,7 +43,7 @@ public class TesteCampoTreinamento {
 	@Test
 	public void deveInteragirComTextArea() {
 		
-		dsl.escreve("elementosForm:sugestoes", "teste\\n\naas\\djdlks\\nUltima linha");
+		dsl.escrever("elementosForm:sugestoes", "teste\\n\naas\\djdlks\\nUltima linha");
 		WebElement textoTextArea = driver.findElement(By.id("elementosForm:sugestoes"));
 		textoTextArea.sendKeys("Teste textArea");
 		Assert.assertEquals("teste\\n\\naas\\djdlks\\nUltima linha", dsl.obterValorCampo("elementosForm:sugestoes"));
@@ -59,7 +59,7 @@ public class TesteCampoTreinamento {
 	@Test
 	public void deveInteragirComCheckBox() {
 		
-		dsl.clicarRadioButton("elementosForm:comidaFavorita:2");
+		dsl.clicarRadio("elementosForm:comidaFavorita:2");
 		Assert.assertTrue(dsl.isRadioMarcado("elementosForm:comidaFavorita:2"));
 	}
 	
