@@ -15,7 +15,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TesteCampoTreinamento {
 	
-	WebDriver driver;
+	private WebDriver driver;
+	private DSL dsl;
 	
 	@Before
 	public void inicializa() {
@@ -23,6 +24,7 @@ public class TesteCampoTreinamento {
 		driver = new FirefoxDriver();
 		driver.manage().window().setSize(new Dimension(800, 600));
 		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		dsl = new DSL(driver);
 	}
 	
 	@After
@@ -32,58 +34,45 @@ public class TesteCampoTreinamento {
 
 	@Test
 	public void testeTextField() {
-		driver = new FirefoxDriver();
+		dsl.escreve("elementosForm:nome", "Teste de escrita");
 		WebElement textoTextField = driver.findElement(By.id("elementosForm:nome"));
 		textoTextField.sendKeys("Teste textField");
-		// Assert.assertEquals("Teste de escrita", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
+		Assert.assertEquals("Teste de escrita", dsl.obterValorCampo("elementosForm:nome"));
 	}
 	
 	@Test
 	public void deveInteragirComTextArea() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
+		
+		dsl.escreve("elementosForm:sugestoes", "teste\\n\naas\\djdlks\\nUltima linha");
 		WebElement textoTextArea = driver.findElement(By.id("elementosForm:sugestoes"));
 		textoTextArea.sendKeys("Teste textArea");
-		// Assert.assertEquals("teste", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+		Assert.assertEquals("teste\\n\\naas\\djdlks\\nUltima linha", dsl.obterValorCampo("elementosForm:sugestoes"));
 	}
 	
 	@Test
 	public void deveInteragirComRadioButton() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		WebElement radioButton = driver.findElement(By.id("elementosForm:sexo:0"));
-		radioButton.click();
-		radioButton.isSelected();
-		Assert.assertTrue(radioButton.isSelected());
+		
+		driver.findElement(By.id("elementosForm:sexo:0")).click();
+		Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
 	}
 	
 	@Test
 	public void deveInteragirComCheckBox() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		WebElement checkBox = driver.findElement(By.id("elementosForm:comidaFavorita:2"));
-		checkBox.click();
-		checkBox.isSelected();
-		Assert.assertTrue(checkBox.isSelected());
+		
+		dsl.clicarRadioButton("elementosForm:comidaFavorita:2");
+		Assert.assertTrue(dsl.isRadioMarcado("elementosForm:comidaFavorita:2"));
 	}
 	
 	@Test
 	public void deveInteragirComComboBox() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		WebElement comboBox = driver.findElement(By.id("elementosForm:escolaridade"));
-		Select opcaoGraduacao = new Select(comboBox);
-		// opcaoGraduacao.selectByIndex(2);
-		// opcaoGraduacao.selectByValue("superior");
-		opcaoGraduacao.selectByVisibleText("2o grau completo");
 		
-		Assert.assertEquals("2o grau completo", opcaoGraduacao.getFirstSelectedOption().getText());
+		dsl.selecionarCombo("elementosForm:escolaridade",  "2o grau completo");
+		Assert.assertEquals("2o grau completo", dsl.obterValorCombo("elementosForm:escolaridade"));
 	}
 	
 	@Test
 	public void deveVerificarValoresCombo() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
+		
 		WebElement comboBox = driver.findElement(By.id("elementosForm:escolaridade"));
 		Select opcaoGraduacao = new Select(comboBox);
 		List<WebElement> options = opcaoGraduacao.getOptions();
@@ -101,26 +90,25 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void deveVerificarValoresComboMultiplo() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		WebElement comboMult = driver.findElement(By.id("elementosForm:esportes"));
-		Select opcaoEsporte = new Select(comboMult);
-		opcaoEsporte.selectByVisibleText("Natacao");
-		opcaoEsporte.selectByVisibleText("Corrida");
-		opcaoEsporte.selectByVisibleText("O que eh esporte?");
 		
-		List<WebElement> allSelectedOptions =  opcaoEsporte.getAllSelectedOptions();
+		dsl.selecionarCombo("elementosForm:esportes",  "Natação");
+		dsl.selecionarCombo("elementosForm:esportes",  "Corrida");
+		dsl.selecionarCombo("elementosForm:esportes",  "O que eh esporte?");
+		
+		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		Select combo = new Select(element);
+		List<WebElement> allSelectedOptions =  combo.getAllSelectedOptions();
 		Assert.assertEquals(3, allSelectedOptions.size());
 		
-		opcaoEsporte.deselectByVisibleText("Corrida");
-		allSelectedOptions = opcaoEsporte.getAllSelectedOptions();
+		combo.deselectByVisibleText("Corrida");
+		allSelectedOptions = combo.getAllSelectedOptions();
 		Assert.assertEquals(2,  allSelectedOptions.size());
 	}
 	
 	@Test
 	public void deveInteragirComBotoes() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
+		dsl.clicarBotao("buttonSimple");
+		
 		WebElement botao1 = driver.findElement(By.id("buttonSimple"));
 		botao1.click();
 		
@@ -129,30 +117,23 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void deveInteragirComLinks() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
 		
-		WebElement link = driver.findElement(By.linkText("Voltar"));
-		link.click();
+		dsl.clicarLink("Voltar");
 		
-		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+		Assert.assertEquals("Voltou!", dsl.obterTexto("resultado"));
 	}
 	
 	@Test
 	public void deveBuscarTextosNaPagina() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		
 		System.out.println(driver.findElement(By.tagName("body")).getText());
 		
 		// Assert.assertTrue(driver.findElement(By.tagName("body"))
 		// .getText().contains("Campo de Treinamento"));
-		Assert.assertEquals("Campo de Treinamento", 
-				driver.findElement(By.tagName("h3")).getText());
+		Assert.assertEquals("Campo de Treinamento", dsl.obterTexto(By.tagName("h3")));
 		
 		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
-				driver.findElement(By.className("facilAchar")).getText());
+				dsl.obterTexto(By.className("facilAchar")));
 		
 	}
 	
