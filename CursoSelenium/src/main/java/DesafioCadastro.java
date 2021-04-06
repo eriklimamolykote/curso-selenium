@@ -84,4 +84,16 @@ public class DesafioCadastro {
 		Assert.assertEquals("Tem certeza que voce eh vegetariano?", dsl.alertaObterTextoEAceita());
 	}
 	
+	@Test
+	public void deveValidarEsportistaIndeciso() {
+		dsl.escrever("elementosForm:nome", "Nome qualquer");
+		dsl.escrever("elementosForm:sobrenome", "Sobrenome qualquer");
+		dsl.clicarRadio("elementosForm:sexo:1");
+		dsl.clicarRadio("elementosForm:comidaFavorita:0");
+		dsl.selecionarCombo("elementosForm:esportes", "Karate");
+		dsl.selecionarCombo("elementosForm:esportes", "O que eh esporte?");
+		dsl.clicarBotao("elementosForm:cadastrar");
+		Assert.assertEquals("Voce faz esporte ou nao?", dsl.alertaObterTextoEAceita());
+	}
+	
 }

@@ -10,13 +10,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TesteGoogle {
 	
-	WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
 	
 	@Before
 	public void inicializa() {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		driver = new FirefoxDriver();
 		driver.manage().window().setSize(new Dimension(800, 600));
-		driver.get("http://www.google.com");
 	}
 	
 	@After
@@ -26,7 +25,11 @@ public class TesteGoogle {
 
 	@Test
 	public void teste() {
-		
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+		// System.setProperty("webdriver.chrome.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\chromedriver.exe");
+		// WebDriver driver = new ChromeDriver();
+		// WebDriver driver = new InternetExplorerDriver();
+		driver.get("http://www.google.com");
 		Assert.assertEquals("Google", driver.getTitle());
 		System.out.println(driver.getTitle());
 		

@@ -15,6 +15,13 @@ public class DSL {
 		this.driver = driver;
 	}
 	
+	/********* TextField e TextArea ************/
+	
+	public void escrever(By by, String texto) {
+		driver.findElement(by).clear();
+		driver.findElement(by).sendKeys(texto);
+	}
+	
 	public void escrever(String id_campo, String texto) {
 		driver.findElement(By.id(id_campo)).sendKeys(texto);
 	}
@@ -22,6 +29,8 @@ public class DSL {
 	public String obterValorCampo(String id_campo) {
 		return driver.findElement(By.id(id_campo)).getAttribute("value");
 	}
+	
+	/********* Radio e Check ************/
 	
 	public void clicarRadio(String id) {
 		driver.findElement(By.id(id)).click();
@@ -38,6 +47,8 @@ public class DSL {
 	public boolean isCheckMarcado(String id) {
 		return driver.findElement(By.id(id)).isSelected();
 	}
+	
+	/********* Combo ************/
 	
 	public void selecionarCombo(String id, String valor) {
 		WebElement element = driver.findElement(By.id(id));
@@ -89,6 +100,8 @@ public class DSL {
 		return false;
 	}
 	
+	/********* Botao ************/
+	
 	public void clicarBotao(String id) {
 		driver.findElement(By.id(id)).click();
 	}
@@ -96,6 +109,8 @@ public class DSL {
 	public String obterValueElemento(String id) {
 		return driver.findElement(By.id(id)).getAttribute("value");
 	}
+	
+	/********* Link ************/
 	
 	public void clicarLink(String link){
 		driver.findElement(By.linkText(link)).click();
@@ -109,7 +124,9 @@ public class DSL {
 		return obterTexto(By.id(id));
 	}
 	
-	public String alertaObterTextoAceito() {
+	/********* Alerts ************/
+	
+	public String alertaObterTexto() {
 		Alert alert = driver.switchTo().alert();
 		return alert.getText();
 	}
@@ -119,6 +136,33 @@ public class DSL {
 		String valor = alert.getText();
 		alert.accept();
 		return valor;
+	}
+	
+	public String alertaObterTextoENega() {
+		Alert alert = driver.switchTo().alert();
+		String valor = alert.getText();
+		alert.dismiss();
+		return valor;
+	}
+	
+	public void alertaEscrever(String valor) {
+		Alert alert = driver.switchTo().alert();
+		alert.sendKeys(valor);
+		alert.accept();
+	}
+	
+	/********* Frames e Janelas ************/
+	
+	public void entrarFrame(String id) {
+		driver.switchTo().frame(id);
+	}
+	
+	public void sairFrame() {
+		driver.switchTo().defaultContent();
+	}
+	
+	public void trocarJanela(String id) {
+		driver.switchTo().window(id);
 	}
 	
 }
