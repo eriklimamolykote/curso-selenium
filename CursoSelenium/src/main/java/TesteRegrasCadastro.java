@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import junit.framework.Assert;
 
 @RunWith(Parameterized.class)
-public class TesteRegasCadastro {
+public class TesteRegrasCadastro {
 	
 	private WebDriver driver;
 	private DSL dsl;
