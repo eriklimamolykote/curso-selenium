@@ -33,8 +33,12 @@ public class DSL {
 	
 	/********* Radio e Check ************/
 	
+	public void clicarRadio(By by) {
+		driver.findElement(by).click();
+	}
+	
 	public void clicarRadio(String id) {
-		driver.findElement(By.id(id)).click();
+		clicarRadio(By.id(id));
 	}
 	
 	public boolean isRadioMarcado(String id) {
@@ -99,6 +103,11 @@ public class DSL {
 		}
 		
 		return false;
+	}
+	
+	public void selecionarComboPrime(String radical, String valor) {
+		clicarRadio(By.xpath("//*[@id='"+radical+"_input']/../..//span"));
+		clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
 	}
 	
 	/********* Botao ************/
@@ -175,13 +184,25 @@ public class DSL {
 	
 	/****************** Tabela ******************/
 	
-	public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String titulo) {
+	public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String tipo) {
 		// procurar coluna do registro
 		WebElement tabela = driver.findElement(By.xpath("//*[@id='elementosForm:tabelaUsuarios']"));
 		int idColuna = obterIndiceColuna(colunaBusca, tabela);
 				
 		// encontrar a linha do registro
-		List<WebElement> linhas = tabela.findElements(By.xpath(".//tr/td["+idColuna+"]"));
+		int idLinha = obterIndiceLinha(valor, tabela, idColuna);
+		
+		// procurar coluna do botão
+		int idColunaBotao = obterIndiceColuna(colunaBotao, tabela);
+		
+		// clicar no botão da célula encontrada
+		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+		celula.findElement(By.xpath(".//input")).click();
+		
+	}
+
+	protected int obterIndiceLinha(String valor, WebElement tabela, int idColuna) {
+		List<WebElement> linhas = tabela.findElements(By.xpath("./tbody/tr/td["+idColuna+"]"));
 		int idLinha = -1;
 		for (int i = 0; i < linhas.size(); i++) {
 			if (linhas.get(i).getText().equals(valor)) {
@@ -189,10 +210,7 @@ public class DSL {
 				break;
 			}
 		}
-		
-		// procurar coluna do botão
-		
-		// clicar no botão da célula encontrada
+		return idLinha;
 	}
 
 	private int obterIndiceColuna(String coluna, WebElement tabela) {
