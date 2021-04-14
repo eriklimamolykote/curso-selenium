@@ -1,3 +1,4 @@
+package br.ce.wcaquino.test;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -13,12 +14,14 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import br.ce.wcaquino.core.BaseTest;
 import br.ce.wcaquino.core.DSL;
 import br.ce.wcaquino.core.DriverFactory;
+import br.ce.wcaquino.page.CampoTreinamentoPage;
 import junit.framework.Assert;
 
 @RunWith(Parameterized.class)
-public class TesteRegrasCadastro {
+public class TesteRegrasCadastro extends BaseTest {
 	
 	private DSL dsl;
 	private CampoTreinamentoPage page;
@@ -41,11 +44,6 @@ public class TesteRegrasCadastro {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
 		dsl = new DSL();
 		page = new CampoTreinamentoPage();
-	}
-	
-	@After
-	public void finaliza() {
-		DriverFactory.killDriver();
 	}
 	
 	@Parameters

@@ -1,3 +1,4 @@
+package br.ce.wcaquino.test;
 import java.io.File;
 
 import org.junit.After;

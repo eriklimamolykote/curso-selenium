@@ -1,3 +1,4 @@
+package br.ce.wcaquino.test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +8,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
+
 import br.ce.wcaquino.core.DriverFactory;
+import br.ce.wcaquino.page.CampoTreinamentoPage;
+import br.ce.wcaquino.core.BaseTest;
 import br.ce.wcaquino.core.DSL;
 
 import junit.framework.Assert;
 
-public class DesafioCadastro {
+public class DesafioCadastro extends BaseTest {
 	
 	private DSL dsl;
 	
@@ -24,12 +28,6 @@ public class DesafioCadastro {
 		DriverFactory.getDriver().get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
 		page = new CampoTreinamentoPage();
 	}
-	
-	@After
-	public void finaliza() {
-		DriverFactory.killDriver();
-	}
-
 	
 	@Test
 	public void deveRealizarCadastroComSucesso() {

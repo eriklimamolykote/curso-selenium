@@ -1,3 +1,4 @@
+package br.ce.wcaquino.test;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
