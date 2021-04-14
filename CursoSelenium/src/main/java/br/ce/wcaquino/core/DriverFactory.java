@@ -14,8 +14,14 @@ public class DriverFactory {
 	public static WebDriver getDriver() {
 		if (driver == null) {
 			switch (Propriedades.browser) {
-			case FIREFOX: driver = new FirefoxDriver(); break;
-			case CHROME: driver = new ChromeDriver(); break;
+			case FIREFOX:
+				System.setProperty("webdriver.geckodriver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
+				driver = new FirefoxDriver(); 
+				break;
+			case CHROME:
+				System.setProperty("webdriver.chromedriver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\chromedriver.exe");
+				driver = new ChromeDriver(); 
+				break;
 			}
 			driver.manage().window().setSize(new Dimension(800, 600));
 		}

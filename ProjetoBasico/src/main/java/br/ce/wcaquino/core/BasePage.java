@@ -107,8 +107,12 @@ public class BasePage {
 	
 	/********* Botao ************/
 	
+	public void clicarBotao(By by) {
+		DriverFactory.getDriver().findElement(by).click();
+	}
+	
 	public void clicarBotao(String id) {
-		DriverFactory.getDriver().findElement(By.id(id)).click();
+		clicarBotao(By.id(id));
 	}
 	
 	public String obterValueElemento(String id) {
