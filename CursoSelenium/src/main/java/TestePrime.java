@@ -6,19 +6,18 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import br.ce.wcaquino.core.DSL;
+import br.ce.wcaquino.core.DriverFactory;
 import junit.framework.Assert;
 
 public class TestePrime {
 	
-	private WebDriver driver;
 	private DSL dsl;
 	
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(800, 600));
-		dsl = new DSL(driver);
+		dsl = new DSL();
 	}
 	
 	@After
@@ -28,7 +27,7 @@ public class TestePrime {
 	
 	@Test
 	public void deveInteragirComRadioPrime() {
-		driver.get("https://www.primefaces.org/showcase/ui/input/oneRadio.xhtml");
+		DriverFactory.getDriver().get("https://www.primefaces.org/showcase/ui/input/oneRadio.xhtml");
 		dsl.clicarRadio(By.xpath("//input[@id='j_idt86:console:0']/../..//span"));
 		Assert.assertTrue(dsl.isRadioMarcado("j_idt86:console:0"));
 		dsl.clicarRadio(By.xpath("//label[.='PS4']/..//span"));
@@ -37,7 +36,7 @@ public class TestePrime {
 	
 	@Test
 	public void deveInteragirComSelectPrime() {
-		driver.get("https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml");
+		DriverFactory.getDriver().get("https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml");
 		dsl.selecionarComboPrime("j_idt86:console", "Xbox One");
 		Assert.assertEquals("Xbox One", dsl.obterTexto("j_idt86:console_label"));
 	}

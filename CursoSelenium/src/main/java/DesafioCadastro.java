@@ -7,28 +7,27 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
+import br.ce.wcaquino.core.DriverFactory;
+import br.ce.wcaquino.core.DSL;
 
 import junit.framework.Assert;
 
 public class DesafioCadastro {
 	
-	private WebDriver driver;
 	private DSL dsl;
+	
 	private CampoTreinamentoPage page;
 	
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(800, 600));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
-		dsl = new DSL(driver);
-		page = new CampoTreinamentoPage(driver);
+		DriverFactory.getDriver().get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
+		page = new CampoTreinamentoPage();
 	}
 	
 	@After
 	public void finaliza() {
-		driver.quit();
+		DriverFactory.killDriver();
 	}
 
 	

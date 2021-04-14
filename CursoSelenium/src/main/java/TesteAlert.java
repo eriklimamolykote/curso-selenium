@@ -12,22 +12,22 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+import br.ce.wcaquino.core.DSL;
+import br.ce.wcaquino.core.DriverFactory;
+
 public class TesteAlert {
 	
-	private WebDriver driver;
 	private DSL dsl;
 	
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver.manage().window().setSize(new Dimension(800, 600));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
-		dsl = new DSL(driver);
+		dsl = new DSL();
 	}
 	
 	@After
 	public void finaliza() {
-		driver.quit();
+		DriverFactory.killDriver();;
 	}
 	
 	@Test

@@ -10,17 +10,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import br.ce.wcaquino.core.DSL;
+import br.ce.wcaquino.core.DriverFactory;
+
 public class TesteSincronismo {
-	private WebDriver driver;
+	
 	private DSL dsl;
 	
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(800, 600));
-		driver.get("file:///C:\\Users\\ERIK LIMA\\Desktop\\curso-selenium\\campo-treinamento\\componentes.html");
-		dsl = new DSL(driver);
+		dsl = new DSL();
 	}
 	
 	@After
@@ -37,16 +37,16 @@ public class TesteSincronismo {
 	
 	@Test
 	public void deveUtilizarEsperaImplicita() throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		dsl.clicarBotao("buttonDelay");
 		dsl.escrever("novoCampo","Deu certo?");
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		DriverFactory.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	}
 	
 	@Test
 	public void deveUtilizarEsperaExplicita() throws InterruptedException {
 		dsl.clicarBotao("buttonDelay");
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("novoCampo")));
 		dsl.escrever("novoCampo", "Deu certo?");
 	}
