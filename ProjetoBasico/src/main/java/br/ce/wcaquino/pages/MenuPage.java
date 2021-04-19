@@ -8,5 +8,18 @@ public class MenuPage extends BasePage {
 		clicarLink("Contas");
 		clicarLink("Adicionar");
 	}
+	
+	public void acessarTelaListarConta() {
+		clicarLink("Constas");
+		clicarLink("Listar");
+	}
+	
+	public void acessarTelaInserirMovimentacao() {
+		clicarLink("Criar Movimentação");
+	}
+	
+	public void acessarTelaResumo() {
+		clicarLink("Resumo Mensal");
+	}
 
 }
