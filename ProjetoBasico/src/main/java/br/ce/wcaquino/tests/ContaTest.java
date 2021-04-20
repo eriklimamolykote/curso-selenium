@@ -1,13 +1,17 @@
 package br.ce.wcaquino.tests;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import br.ce.wcaquino.core.BaseTest;
+import br.ce.wcaquino.core.Propriedades;
 import br.ce.wcaquino.pages.ContasPage;
 import br.ce.wcaquino.pages.MenuPage;
 import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ContaTest extends BaseTest {
 	
 	MenuPage menuPage = new MenuPage();
@@ -15,7 +19,7 @@ public class ContaTest extends BaseTest {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testInserirConta() {
+	public void test1_InserirConta() {
 		menuPage.acessarTelaInserirConta();
 		
 		contasPage.setNome("Conta do Teste");
@@ -26,12 +30,12 @@ public class ContaTest extends BaseTest {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testAlterarConta() {
+	public void test2_AlterarConta() {
 		menuPage.acessarTelaListarConta();
 		
 		contasPage.clicarAlterarConta("Conta do Teste");
 		
-		contasPage.setNome("Conta do Teste alterada");
+		contasPage.setNome(Propriedades.NOME_CONTA_ALTERADA);
 		contasPage.salvar();
 		
 		Assert.assertEquals("Conta alterada com sucesso!", contasPage.obterMensagemSucesso());
@@ -39,21 +43,12 @@ public class ContaTest extends BaseTest {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testInserirContaMesmoNome() {
+	public void test3_InserirContaMesmoNome() {
 		menuPage.acessarTelaInserirConta();
 		
-		contasPage.setNome("Conta do Teste alterada");
+		contasPage.setNome(Propriedades.NOME_CONTA_ALTERADA);
 		contasPage.salvar();
 		
 		Assert.assertEquals("Já existe uma conta com esse nome!", contasPage.obterMensagemErro());
 	}
-	
-	@Test
-	public void testExcluirContaComMovimentacao() {
-		menuPage.acessarTelaListarConta();
-		
-		contasPage.clicarExcluirConta("Conta do Teste alterada");
-		
-		Assert.assertEquals("Conta em uso na movimentações", contasPage.obterMensagemErro());
-	};
 }

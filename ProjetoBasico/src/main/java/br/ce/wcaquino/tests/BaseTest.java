@@ -16,17 +16,8 @@ import br.ce.wcaquino.core.Propriedades;
 import br.ce.wcaquino.pages.LoginPage;
 
 public class BaseTest {
-	private LoginPage page = new LoginPage();
-	
 	@Rule
 	public TestName testName = new TestName();
-	
-	@Before
-	public void inicializa() {
-		page.acessarTelaInicial();
-		
-		page.logar("wagner@costa", "123456");
-	}
 	
 	@After
 	public void finaliza() throws IOException{
@@ -39,5 +30,4 @@ public class BaseTest {
 			DriverFactory.killDriver();
 		}
 	}
-
 }
