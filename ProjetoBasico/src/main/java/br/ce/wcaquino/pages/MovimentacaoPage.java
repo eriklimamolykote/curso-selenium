@@ -1,5 +1,7 @@
 package br.ce.wcaquino.pages;
 
+import static br.ce.wcaquino.core.DriverFactory.getDriver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import br.ce.wcaquino.core.BasePage;
-import br.ce.wcaquino.core.DriverFactory;
 
 public class MovimentacaoPage extends BasePage {
-	
+
 	public void setDataMovimentacao(String data) {
 		escrever("data_transacao", data);
 	}
@@ -24,7 +25,7 @@ public class MovimentacaoPage extends BasePage {
 	}
 	
 	public void setInteressado(String interessado) {
-		escrever("descricao", interessado);
+		escrever("interessado", interessado);
 	}
 	
 	public void setValor(String valor) {
@@ -35,22 +36,22 @@ public class MovimentacaoPage extends BasePage {
 		selecionarCombo("conta", conta);
 	}
 	
-	public void setStatusPago() {
+	public void setStatusPago(){
 		clicarRadio("status_pago");
 	}
 	
-	public void salvar() {
+	public void salvar(){
 		clicarBotaoPorTexto("Salvar");
 	}
 	
-	public String obterMensagemSucesso() {
+	public String obterMensagemSucesso(){
 		return obterTexto(By.xpath("//div[@class='alert alert-success']"));
 	}
 	
-	public List<String> obterErros() {
-		List<WebElement> erros = DriverFactory.getDriver().findElements(By.xpath("//div[@class='alert alert-danger']//li"));
+	public List<String> obterErros(){
+		List<WebElement> erros = getDriver().findElements(By.xpath("//div[@class='alert alert-danger']//li"));
 		List<String> retorno = new ArrayList<String>();
-		for (WebElement erro: erros) {
+		for(WebElement erro: erros) {
 			retorno.add(erro.getText());
 		}
 		return retorno;

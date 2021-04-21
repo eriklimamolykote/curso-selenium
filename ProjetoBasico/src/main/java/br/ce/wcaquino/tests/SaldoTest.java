@@ -11,11 +11,10 @@ import br.ce.wcaquino.pages.MenuPage;
 public class SaldoTest extends BaseTest {
 	HomePage page = new HomePage();
 	MenuPage menu = new MenuPage();
-	
-	@Test
-	public void testSaldoConta() {
-		menu.acessarTelaPrincipal();
-		Assert.assertEquals("500.00", page.obterSaldoConta(Propriedades.NOME_CONTA_ALTERADA));
-	}
 
+	@Test
+	public void testSaldoConta(){
+		menu.acessarTelaPrincipal();
+		Assert.assertEquals("534.00", page.obterSaldoConta("Conta para saldo"));
+	}
 }

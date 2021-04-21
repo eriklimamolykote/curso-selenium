@@ -4,13 +4,18 @@ public class Propriedades {
 	
 	public static boolean FECHAR_BROWSER = false;
 	
-	public static Browsers browser = Browsers.FIREFOX;
+	public static Browsers BROWSER = Browsers.FIREFOX;
 	
-	public static String NOME_CONTA_ALTERADA = "Conta Alterada " + System.nanoTime();
+	public static TipoExecucao TIPO_EXECUCAO = TipoExecucao.GRID; 
 	
 	public enum Browsers {
 		CHROME,
 		FIREFOX
+	}
+	
+	public enum TipoExecucao {
+		LOCAL,
+		GRID
 	}
 
 }

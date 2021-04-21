@@ -1,7 +1,6 @@
 package br.ce.wcaquino.suites;
 
 import org.junit.BeforeClass;
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -23,17 +22,18 @@ import br.ce.wcaquino.tests.SaldoTest;
 	ResumoTest.class
 })
 public class SuiteGeral {
-	private LoginPage page = new LoginPage();
+	private static LoginPage page = new LoginPage();
 	
 	@BeforeClass
-	public void inicializa() {
+	public static void reset() {
 		page.acessarTelaInicial();
 		
-		page.logar("wagner@costa", "123456");
-	}
-	
-	@AfterClass
-	public static void finaliza() {
+		page.setEmail("wagner@costa");
+		page.setSenha("123456");
+		page.entrar();
+		
+		page.resetar();
+		
 		DriverFactory.killDriver();
 	}
 }

@@ -4,25 +4,25 @@ import br.ce.wcaquino.core.BasePage;
 
 public class MenuPage extends BasePage {
 	
-	public void acessarTelaInserirConta() {
+	public void acessarTelaInserirConta(){
 		clicarLink("Contas");
 		clicarLink("Adicionar");
 	}
 	
-	public void acessarTelaListarConta() {
-		clicarLink("Constas");
+	public void acessarTelaListarConta(){
+		clicarLink("Contas");
 		clicarLink("Listar");
 	}
 	
-	public void acessarTelaInserirMovimentacao() {
-		clicarLink("Criar Movimentação");
+	public void acessarTelaInserirMovimentacao(){
+		clicarLink("Criar MovimentaÃ§Ã£o");
 	}
 	
-	public void acessarTelaResumo() {
+	public void acessarTelaResumo(){
 		clicarLink("Resumo Mensal");
 	}
 	
-	public void acessarTelaPrincipal() {
+	public void acessarTelaPrincipal(){
 		clicarLink("Home");
 	}
 

@@ -1,13 +1,11 @@
 package br.ce.wcaquino.pages;
 
-import org.openqa.selenium.By;
-
 import br.ce.wcaquino.core.BasePage;
 import br.ce.wcaquino.core.DriverFactory;
 
 public class LoginPage extends BasePage {
 	
-	public void acessarTelaInicial() {
+	public void acessarTelaInicial(){
 		DriverFactory.getDriver().get("http://srbarriga.herokuapp.com");
 	}
 	
@@ -19,7 +17,7 @@ public class LoginPage extends BasePage {
 		escrever("senha", senha);
 	}
 	
-	public void entrar() {
+	public void entrar(){
 		clicarBotaoPorTexto("Entrar");
 	}
 	
@@ -28,5 +26,8 @@ public class LoginPage extends BasePage {
 		setSenha(senha);
 		entrar();
 	}
-
+	
+	public void resetar() {
+		clicarLink("reset");
+	}
 }
