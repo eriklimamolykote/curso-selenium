@@ -18,7 +18,7 @@ public class ResumoPage extends BasePage {
 		selecionarCombo("ano", ano);
 	}
 	
-	public void buscar() {
+	public void buscar(){
 		clicarBotao(By.xpath("//input[@value='Buscar']"));
 	}
 }

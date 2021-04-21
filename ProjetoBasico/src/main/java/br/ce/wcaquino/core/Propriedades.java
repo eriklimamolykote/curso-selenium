@@ -2,20 +2,22 @@ package br.ce.wcaquino.core;
 
 public class Propriedades {
 	
-	public static boolean FECHAR_BROWSER = false;
+	public static boolean FECHAR_BROWSER = true;
 	
-	public static Browsers BROWSER = Browsers.FIREFOX;
+	public static Browsers BROWSER = Browsers.IE;
 	
-	public static TipoExecucao TIPO_EXECUCAO = TipoExecucao.GRID; 
+	public static TipoExecucao TIPO_EXECUCAO = TipoExecucao.NUVEM;
 	
 	public enum Browsers {
 		CHROME,
-		FIREFOX
+		FIREFOX,
+		IE
 	}
 	
 	public enum TipoExecucao {
 		LOCAL,
-		GRID
+		GRID,
+		NUVEM
 	}
 
 }

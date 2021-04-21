@@ -7,12 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import br.ce.wcaquino.core.BaseTest;
-import br.ce.wcaquino.core.Propriedades;
 import br.ce.wcaquino.pages.MenuPage;
 import br.ce.wcaquino.pages.MovimentacaoPage;
 import br.ce.wcaquino.utils.DataUtils;
@@ -34,7 +31,7 @@ public class MovimentacaoTest extends BaseTest {
 		movPage.setStatusPago();
 		movPage.salvar();
 		
-		Assert.assertEquals("MovimentaÃ§Ã£o adicionada com sucesso!", movPage.obterMensagemSucesso());
+		Assert.assertEquals("Movimentação adicionada com sucesso!", movPage.obterMensagemSucesso());
 	}
 	
 	@Test
@@ -48,7 +45,7 @@ public class MovimentacaoTest extends BaseTest {
 		Assert.assertTrue(erros.containsAll(Arrays.asList(
 				"Data da Movimentação é obrigatório", "Data do pagamento é obrigatório",
 				"Descrição é obrigatório", "Interessado é obrigatório", 
-				"Valor Ã© obrigatÃ³rio", "Valor deve ser um nÃºmero")));
+				"Valor é obrigatório", "Valor deve ser um número")));
 		Assert.assertEquals(6, erros.size());
 	}
 	

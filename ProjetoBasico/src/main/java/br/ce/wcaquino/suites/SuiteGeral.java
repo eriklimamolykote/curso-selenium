@@ -1,5 +1,6 @@
 package br.ce.wcaquino.suites;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,7 +26,7 @@ public class SuiteGeral {
 	private static LoginPage page = new LoginPage();
 	
 	@BeforeClass
-	public static void reset() {
+	public static void reset(){
 		page.acessarTelaInicial();
 		
 		page.setEmail("wagner@costa");
