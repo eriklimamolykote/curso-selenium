@@ -7,9 +7,7 @@ import static br.ce.wcaquino.core.DriverFactory.getDriver;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -28,7 +26,7 @@ public class ResumoTest extends BaseTest {
 		
 		resumoPage.excluirMovimentacao();
 		
-		Assert.assertEquals("Movimentação removida com sucesso!",
+		Assert.assertEquals("Movimentaï¿½ï¿½o removida com sucesso!",
 				resumoPage.obterMensagemSucesso());
 	}
 	

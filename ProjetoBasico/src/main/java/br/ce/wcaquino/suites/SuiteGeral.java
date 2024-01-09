@@ -2,7 +2,6 @@
 //Contact: https://www.udemy.com/user/francisco-wagner-costa-aquino/
 package br.ce.wcaquino.suites;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

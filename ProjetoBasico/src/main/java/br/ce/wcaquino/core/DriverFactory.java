@@ -36,6 +36,8 @@ public class DriverFactory {
 			switch (Propriedades.BROWSER) {
 				case FIREFOX: driver = new FirefoxDriver(); break;
 				case CHROME: driver = new ChromeDriver(); break;
+			default:
+				break;
 			}
 		}
 		if(Propriedades.TIPO_EXECUCAO == TipoExecucao.GRID) {
@@ -43,11 +45,13 @@ public class DriverFactory {
 			switch (Propriedades.BROWSER) {
 				case FIREFOX: cap = DesiredCapabilities.firefox(); break;
 				case CHROME: cap = DesiredCapabilities.chrome(); break;
+			default:
+				break;
 			}
 			try {
 				driver = new RemoteWebDriver(new URL("http://192.168.0.184:4444/wd/hub"), cap);
 			} catch (MalformedURLException e) {
-				System.err.println("Falha na conexão com o GRID");
+				System.err.println("Falha na conexï¿½o com o GRID");
 				e.printStackTrace();
 			}
 		}
@@ -64,7 +68,7 @@ public class DriverFactory {
 			try {
 				driver = new RemoteWebDriver(new URL("http://wcaquino5:172fcd87-6b7d-4c8d-8693-e20c903affa4@ondemand.saucelabs.com:80/wd/hub"), cap);
 			} catch (MalformedURLException e) {
-				System.err.println("Falha na conexão com a Saucelabs");
+				System.err.println("Falha na conexï¿½o com a Saucelabs");
 				e.printStackTrace();
 			}
 		}
